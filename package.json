@@ -2,9 +2,17 @@
   "name": "node-winsvc",
   "version": "0.1.0",
   "description": "Register Node.js apps as native Windows services. No NSSM. No VBScript. No restart loops.",
-  "keywords": ["windows", "service", "win32", "node", "deployment", "production"],
+  "keywords": ["windows", "service", "win32", "node", "deployment", "production", "scm", "nssm"],
   "author": "Henry Moreno",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HM-IT-CODE/servicio-windows-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HM-IT-CODE/servicio-windows-node/issues"
+  },
+  "homepage": "https://github.com/HM-IT-CODE/servicio-windows-node#readme",
   "bin": {
     "node-winsvc": "dist/main.js"
   },
@@ -15,6 +23,7 @@
     "bin/node-winsvc-core.exe",
     "README.md"
   ],
+  "os": ["win32"],
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "build:rust": "cd rust && cargo build --release",
@@ -24,8 +33,7 @@
     "test": "jest"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "os": ["win32"]
+    "node": ">=18.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
