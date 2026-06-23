@@ -1,0 +1,21 @@
+# Rust
+/rust/target/
+**/*.rs.bk
+
+# Node / TypeScript
+node_modules/
+dist/
+
+# Bundled binary is rebuilt from rust/ — keep it out of git
+bin/*.exe
+
+# Logs / runtime
+logs/
+*.log
+winsvc.config.json
+
+# OS / editor
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/

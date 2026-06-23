@@ -1,0 +1,41 @@
+{
+  "name": "node-winsvc",
+  "version": "0.1.0",
+  "description": "Register Node.js apps as native Windows services. No NSSM. No VBScript. No restart loops.",
+  "keywords": ["windows", "service", "win32", "node", "deployment", "production"],
+  "author": "Henry Moreno",
+  "license": "MIT",
+  "bin": {
+    "node-winsvc": "dist/main.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "bin/node-winsvc-core.exe",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "build:rust": "cd rust && cargo build --release",
+    "bundle:exe": "copy rust\\target\\release\\node-winsvc-core.exe bin\\",
+    "dev": "ts-node src/main.ts",
+    "lint": "eslint src/**/*.ts",
+    "test": "jest"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "os": ["win32"]
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0",
+    "ts-node": "^10.9.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "ts-jest": "^29.0.0"
+  }
+}
