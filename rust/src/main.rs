@@ -25,7 +25,7 @@ enum Command {
         #[arg(long, default_value = "")] working_dir:  String,
         #[arg(long, default_value = "")] log_file:     String,
         #[arg(long, default_value = "auto")] start_type: String,
-        #[arg(long, default_value = "false")] auto_restart: bool,
+        #[arg(long, action = clap::ArgAction::Set, default_value_t = false)] auto_restart: bool,
     },
     Uninstall { #[arg(long)] name: String },
     Start     { #[arg(long)] name: String },

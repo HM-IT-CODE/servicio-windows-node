@@ -15,12 +15,12 @@ export function runStatus(projectRoot: string): void {
 
   const output = processService.runOrThrow({
     binaryPath,
-    args: ['status', '--name', config.name, '--json'],
+    args: ['status', '--name', config.name],
   })
 
   const status = JSON.parse(output) as { state: string; pid?: number; uptime?: string }
 
-  const stateColor = status.state === 'Running' ? '🟢' : '🔴'
+  const stateColor = status.state === 'running' ? '🟢' : '🔴'
   logger.info(`${stateColor} ${config.displayName}`)
   logger.info(`   State:  ${status.state}`)
   if (status.pid)    logger.info(`   PID:    ${status.pid}`)
