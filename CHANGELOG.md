@@ -4,6 +4,14 @@ All notable changes to **node-winsvc** are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.1.1] - 2026-06-23
+
+### Added
+- **`restart` command** — stops and starts the service in one step.
+- **`logs` command** — prints the tail of the service log file.
+  Supports `-f` / `--follow` to stream new output and `-n <N>` to set how many
+  lines to show (default 50).
+
 ## [0.1.0] - 2026-06-23
 
 First public release. 🎉
@@ -27,4 +35,5 @@ First public release. 🎉
 - Windows only. `install` / `uninstall` / `start` / `stop` / `status` require
   Administrator privileges (enforced by the Service Control Manager).
 
+[0.1.1]: https://github.com/HM-IT-CODE/servicio-windows-node/releases/tag/v0.1.1
 [0.1.0]: https://github.com/HM-IT-CODE/servicio-windows-node/releases/tag/v0.1.0

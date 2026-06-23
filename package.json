@@ -1,6 +1,6 @@
 {
   "name": "node-winsvc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Register Node.js apps as native Windows services. No NSSM. No VBScript. No restart loops.",
   "keywords": ["windows", "service", "win32", "node", "deployment", "production", "scm", "nssm"],
   "author": "Henry Moreno",
