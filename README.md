@@ -25,6 +25,8 @@ npx node-winsvc init       # create winsvc.config.json
 npx node-winsvc install    # register as a Windows service  (Administrator)
 npx node-winsvc start      # start it                        (Administrator)
 npx node-winsvc status     # check it                        (Administrator)
+npx node-winsvc logs -f    # tail the service log
+npx node-winsvc restart    # stop + start                    (Administrator)
 npx node-winsvc stop
 npx node-winsvc uninstall
 ```
@@ -143,7 +145,9 @@ npx node-winsvc <command>
 | `uninstall` | Remove the service (`DeleteService`).                 | yes   |
 | `start`     | Start the service (`StartServiceW`).                  | yes   |
 | `stop`      | Stop the service (`ControlService` STOP).             | yes   |
+| `restart`   | Stop then start the service.                          | yes   |
 | `status`    | Query state (`QueryServiceStatus`) → JSON.            | yes   |
+| `logs`      | Print the service log (`-f` follow, `-n <N>` lines).  | no    |
 
 ---
 
@@ -162,9 +166,11 @@ npm run build            # tsc → dist/
 
 ## Roadmap
 
-- [ ] Service-runner mode: the Rust core also acts **as** the service host (`StartServiceCtrlDispatcherW` + child-process supervision + auto-restart).
-- [ ] Live log tail: `node-winsvc logs`.
+- [x] Service-runner mode: the Rust core acts **as** the service host (`StartServiceCtrlDispatcherW` + child-process supervision + auto-restart).
+- [x] Live log tail: `node-winsvc logs -f`.
+- [x] `node-winsvc restart`.
 - [ ] `npx node-winsvc doctor` — diagnose permissions / Node path / config.
+- [ ] Real PID + uptime in `status`.
 - [ ] Health-check hooks.
 
 ---
