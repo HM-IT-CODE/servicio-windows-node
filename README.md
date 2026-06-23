@@ -1,17 +1,52 @@
 # node-winsvc
 
+[![npm version](https://img.shields.io/npm/v/node-winsvc.svg)](https://www.npmjs.com/package/node-winsvc)
+[![npm downloads](https://img.shields.io/npm/dm/node-winsvc.svg)](https://www.npmjs.com/package/node-winsvc)
+[![license](https://img.shields.io/npm/l/node-winsvc.svg)](./LICENSE)
+[![platform](https://img.shields.io/badge/platform-Windows-blue.svg)](#)
+[![built with Rust](https://img.shields.io/badge/core-Rust-orange.svg)](#)
+
 > Register Node.js apps as **native Windows services**. No NSSM. No VBScript. No `npm start` running forever in a forgotten terminal.
 
 `node-winsvc` turns any Node.js application into a first-class Windows service using the **native Win32 Service Control Manager API** — the same mechanism SQL Server, IIS and the Windows kernel use. The heavy lifting is done by a small Rust binary; you drive it with a friendly CLI.
 
+## Install
+
+```bash
+npm install --save-dev node-winsvc
+# or use it on demand, no install:
+npx node-winsvc <command>
+```
+
+## Quick start
+
 ```bash
 npx node-winsvc init       # create winsvc.config.json
-npx node-winsvc install    # register as a Windows service
-npx node-winsvc start      # start it
-npx node-winsvc status     # check it
+npx node-winsvc install    # register as a Windows service  (Administrator)
+npx node-winsvc start      # start it                        (Administrator)
+npx node-winsvc status     # check it                        (Administrator)
 npx node-winsvc stop
 npx node-winsvc uninstall
 ```
+
+A minimal `winsvc.config.json`:
+
+```json
+{
+  "name": "my-api",
+  "displayName": "My Node API",
+  "description": "Production Node.js API service",
+  "script": "dist/server.js",
+  "nodeArgs": [],
+  "env": { "NODE_ENV": "production", "PORT": "8080" },
+  "autoRestart": true,
+  "startType": "auto",
+  "logFile": "logs/service.log",
+  "workingDirectory": "."
+}
+```
+
+That's it — your app now starts on boot, survives logoff, restarts on crash, and shows up in `services.msc`.
 
 ---
 
