@@ -8,7 +8,7 @@ const binaryService  = new BinaryService()
 const processService = new ProcessService()
 
 export function runStatus(projectRoot: string): void {
-  logger.title('node-winsvc — Status')
+  logger.title('Aruna — Status')
 
   const config     = configService.load(projectRoot)
   const binaryPath = binaryService.resolvePath()

@@ -6,6 +6,7 @@ use crate::models::InstallArgs;
 use crate::services::scm::{ScmHandle, to_wide};
 use crate::services::node_finder::find_node_exe;
 use crate::services::service_config;
+use crate::services::failure_actions;
 
 pub fn run(args: &InstallArgs) -> Result<()> {
     // Validate Node is installed before registering anything
@@ -61,8 +62,15 @@ pub fn run(args: &InstallArgs) -> Result<()> {
             SERVICE_CONFIG_DESCRIPTION,
             Some(&mut desc as *mut _ as *mut _),
         );
-        let _ = CloseServiceHandle(svc);
     }
+
+    // Tercer nivel de red: si el supervisor muere, lo relanza Windows.
+    // No es fatal si falla: el servicio ya quedo registrado y funcional.
+    if let Err(e) = failure_actions::configure(svc) {
+        eprintln!("warning: {e}");
+    }
+
+    unsafe { let _ = CloseServiceHandle(svc); }
 
     println!(r#"{{"ok":true,"name":"{}","message":"Service installed"}}"#, args.name);
     Ok(())

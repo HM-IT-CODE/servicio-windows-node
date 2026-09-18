@@ -1,0 +1,12 @@
+{
+  "name": "nodewinsvc-testapp",
+  "displayName": "node-winsvc Test App",
+  "description": "Temporary service to validate node-winsvc end-to-end",
+  "script": "server.js",
+  "nodeArgs": [],
+  "env": { "NODE_ENV": "production", "PORT": "7799" },
+  "autoRestart": true,
+  "startType": "auto",
+  "logFile": "logs/service.log",
+  "workingDirectory": "."
+}

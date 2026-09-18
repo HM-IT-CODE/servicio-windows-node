@@ -17,6 +17,15 @@ impl ScmHandle {
         Ok(Self(handle))
     }
 
+    /// Solo lectura: `status` no tiene por que exigir administrador.
+    pub fn open_for_query() -> Result<Self> {
+        let handle = unsafe {
+            OpenSCManagerW(PCWSTR::null(), PCWSTR::null(), SC_MANAGER_CONNECT)
+                .map_err(|e| anyhow!("Cannot open SCM: {}", e))?
+        };
+        Ok(Self(handle))
+    }
+
     pub fn raw(&self) -> SC_HANDLE {
         self.0
     }

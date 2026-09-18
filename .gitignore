@@ -9,10 +9,15 @@ dist/
 # Bundled binary is rebuilt from rust/ — keep it out of git
 bin/*.exe
 
+# Generated installers: rebuilt with `aruna installer`, tens of MB each
+instalador/
+**/instalador/
+vendor/
+*.tgz
+
 # Logs / runtime
 logs/
 *.log
-winsvc.config.json
 
 # OS / editor
 Thumbs.db

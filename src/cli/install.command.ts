@@ -9,7 +9,7 @@ const binaryService  = new BinaryService()
 const processService = new ProcessService()
 
 export function runInstall(projectRoot: string): void {
-  logger.title('node-winsvc — Install')
+  logger.title('Aruna — Install')
 
   logger.step('Reading winsvc.config.json...')
   const config = configService.load(projectRoot)
@@ -42,5 +42,5 @@ export function runInstall(projectRoot: string): void {
   })
 
   logger.success(`Service "${config.name}" installed successfully.`)
-  logger.info(`Run: node-winsvc start`)
+  logger.info(`Run: aruna start`)
 }

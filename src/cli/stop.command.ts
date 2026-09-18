@@ -8,7 +8,7 @@ const binaryService  = new BinaryService()
 const processService = new ProcessService()
 
 export function runStop(projectRoot: string): void {
-  logger.title('node-winsvc — Stop')
+  logger.title('Aruna — Stop')
 
   const config     = configService.load(projectRoot)
   const binaryPath = binaryService.resolvePath()

@@ -12,7 +12,7 @@ const DEFAULT_LINES = 50
  * Flags (read from argv): `-f` / `--follow` to stream, `-n <N>` for line count.
  */
 export function runLogs(projectRoot: string): void {
-  logger.title('node-winsvc — Logs')
+  logger.title('Aruna — Logs')
 
   const config  = configService.load(projectRoot)
   const logPath = path.resolve(projectRoot, config.logFile)

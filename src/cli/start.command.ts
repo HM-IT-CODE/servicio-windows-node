@@ -8,7 +8,7 @@ const binaryService  = new BinaryService()
 const processService = new ProcessService()
 
 export function runStart(projectRoot: string): void {
-  logger.title('node-winsvc — Start')
+  logger.title('Aruna — Start')
 
   const config     = configService.load(projectRoot)
   const binaryPath = binaryService.resolvePath()
@@ -17,5 +17,5 @@ export function runStart(projectRoot: string): void {
   processService.runOrThrow({ binaryPath, args: ['start', '--name', config.name] })
 
   logger.success(`Service "${config.name}" is running.`)
-  logger.info(`Check status: node-winsvc status`)
+  logger.info(`Check status: aruna status`)
 }

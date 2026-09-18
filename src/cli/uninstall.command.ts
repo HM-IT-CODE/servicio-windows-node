@@ -8,7 +8,7 @@ const binaryService  = new BinaryService()
 const processService = new ProcessService()
 
 export function runUninstall(projectRoot: string): void {
-  logger.title('node-winsvc — Uninstall')
+  logger.title('Aruna — Uninstall')
 
   const config     = configService.load(projectRoot)
   const binaryPath = binaryService.resolvePath()

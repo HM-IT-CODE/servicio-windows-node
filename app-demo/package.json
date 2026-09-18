@@ -1,0 +1,13 @@
+{
+  "name": "app-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "App minima para ver como Aruna la convierte en servicio de Windows.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "devDependencies": {
+    "aruna-winsvc": "^1.0.0"
+  }
+}

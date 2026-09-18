@@ -1,0 +1,6 @@
+# El binario tiene que ser autocontenido: sin esto, el exe queda dependiente de
+# VCRUNTIME140.dll y no arranca en un servidor limpio, SIN NINGUN AVISO en
+# tiempo de compilacion. Comprobar siempre antes de copiar el exe:
+#   grep -a -c VCRUNTIME140 target/release/node-winsvc-core.exe   # debe dar 0
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]

@@ -22,7 +22,7 @@ export class BinaryNotFoundError extends WinsvcError {
 
 export class NotWindowsError extends WinsvcError {
   constructor() {
-    super('node-winsvc only works on Windows', 'NOT_WINDOWS')
+    super('Aruna only works on Windows', 'NOT_WINDOWS')
   }
 }
 

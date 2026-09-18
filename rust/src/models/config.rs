@@ -13,11 +13,3 @@ pub struct InstallArgs {
     pub start_type:   String,
     pub auto_restart: bool,
 }
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct ServiceStatus {
-    pub name:   String,
-    pub state:  String,
-    pub pid:    Option<u32>,
-    pub uptime: Option<String>,
-}

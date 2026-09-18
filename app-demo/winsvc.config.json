@@ -1,0 +1,32 @@
+{
+  "name": "app-demo",
+  "displayName": "App Demo - Aruna",
+  "description": "Servidor minimo que corre como servicio de Windows.",
+  "script": "src/server.js",
+  "nodeArgs": [],
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "4100"
+  },
+  "autoRestart": true,
+  "startType": "auto",
+  "logFile": "logs/service.log",
+  "workingDirectory": ".",
+  "installer": {
+    "appName": "App Demo",
+    "version": "1.0.0",
+    "publisher": "Aruna",
+    "include": [
+      "src",
+      "package.json"
+    ],
+    "prompts": [
+      {
+        "key": "PORT",
+        "label": "Puerto HTTP",
+        "default": "4100",
+        "group": "Servicio"
+      }
+    ]
+  }
+}

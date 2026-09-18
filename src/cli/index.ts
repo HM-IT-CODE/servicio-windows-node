@@ -6,12 +6,14 @@ import { runStop }      from './stop.command'
 import { runRestart }   from './restart.command'
 import { runStatus }    from './status.command'
 import { runLogs }      from './logs.command'
+import { runDoctor }    from './doctor.command'
+import { runInstaller } from './installer.command'
 import { logger }       from '../utils/logger'
 
 type CommandName =
   | 'init' | 'install' | 'uninstall'
   | 'start' | 'stop' | 'restart'
-  | 'status' | 'logs'
+  | 'status' | 'logs' | 'doctor' | 'installer'
 
 const COMMANDS: Record<CommandName, (root: string) => void> = {
   init:      runInit,
@@ -22,6 +24,8 @@ const COMMANDS: Record<CommandName, (root: string) => void> = {
   restart:   runRestart,
   status:    runStatus,
   logs:      runLogs,
+  doctor:    runDoctor,
+  installer: runInstaller,
 }
 
 export function dispatch(command: string, projectRoot: string): void {
@@ -37,8 +41,8 @@ export function dispatch(command: string, projectRoot: string): void {
 }
 
 function printHelp(): void {
-  logger.title('node-winsvc — Native Windows Service Manager for Node.js')
-  console.log('Usage: node-winsvc <command>\n')
+  logger.title('Aruna — servicios de Windows para Node.js')
+  console.log('Usage: aruna <command>\n')
   console.log('Commands:')
   console.log('  init        Create winsvc.config.json in current directory')
   console.log('  install     Register app as a Windows service')
@@ -47,9 +51,13 @@ function printHelp(): void {
   console.log('  stop        Stop the service')
   console.log('  restart     Restart the service (stop + start)')
   console.log('  status      Show current service status')
-  console.log('  logs        Print the service log  (-f to follow, -n <N> lines)\n')
+  console.log('  logs        Print the service log  (-f to follow, -n <N> lines)')
+  console.log('  doctor      Diagnose config, core binary, Node and script paths')
+  console.log('  installer   Build a double-click installer .exe for your app\n')
   console.log('Example:')
-  console.log('  npx node-winsvc init')
-  console.log('  npx node-winsvc install')
-  console.log('  npx node-winsvc start')
+  console.log('  npx aruna init')
+  console.log('  npx aruna doctor')
+  console.log('  npx aruna install')
+  console.log('  npx aruna start')
+  console.log('  npx aruna installer   # one .exe to install it anywhere')
 }

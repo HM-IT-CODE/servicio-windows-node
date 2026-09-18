@@ -1,8 +1,22 @@
 {
-  "name": "node-winsvc",
-  "version": "0.1.1",
-  "description": "Register Node.js apps as native Windows services. No NSSM. No VBScript. No restart loops.",
-  "keywords": ["windows", "service", "win32", "node", "deployment", "production", "scm", "nssm"],
+  "name": "aruna-winsvc",
+  "version": "1.0.1",
+  "description": "Register Node.js apps as native Windows services, and ship them as a double-click installer. No NSSM, no .NET, zero dependencies.",
+  "keywords": [
+    "windows",
+    "service",
+    "win32",
+    "node",
+    "deployment",
+    "production",
+    "scm",
+    "installer",
+    "setup",
+    "nssm",
+    "node-windows",
+    "winsw",
+    "aruna"
+  ],
   "author": "Henry Moreno",
   "license": "MIT",
   "repository": {
@@ -14,16 +28,22 @@
   },
   "homepage": "https://github.com/HM-IT-CODE/servicio-windows-node#readme",
   "bin": {
-    "node-winsvc": "dist/main.js"
+    "aruna-winsvc": "dist/main.js",
+    "aruna": "dist/main.js"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist/",
     "bin/node-winsvc-core.exe",
-    "README.md"
+    "bin/node-winsvc-setup.exe",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
   ],
-  "os": ["win32"],
+  "os": [
+    "win32"
+  ],
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "build:rust": "cd rust && cargo build --release",
