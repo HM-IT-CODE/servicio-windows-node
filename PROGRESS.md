@@ -1,4 +1,4 @@
-# 📋 node-winsvc — Estado del Proyecto
+# 📋 Aruna (`aruna-winsvc`) — Estado del Proyecto
 
 > **Lee este archivo primero.** Resume qué se construyó, qué falta, y cómo
 > continuar sin perder contexto. Fecha de corte: **2026-09-18**.
@@ -7,7 +7,7 @@
 
 ## 🎯 Qué es este proyecto
 
-Paquete npm (`npx node-winsvc`) que registra apps de Node.js como **servicios
+Paquete npm (`npx aruna`) que registra apps de Node.js como **servicios
 nativos de Windows** usando la API Win32 Service Control Manager. Sin NSSM, sin
 VBScript, sin `npm start` eterno. Núcleo en **Rust** + CLI en **TypeScript**.
 
@@ -97,33 +97,62 @@ Comparativa medida (node.exe de 80 MB + 7.900 archivos):
 
 ---
 
+## ✅ Validación en vivo — 2026-09-18, noche
+
+Las cuatro pruebas que faltaban, hechas sobre `app-demo` instalada con el
+instalador propio en `C:\Program Files\App Demo`:
+
+| Prueba | Resultado |
+|---|---|
+| Matar el proceso hijo | Revivió en 1 s, con PID nuevo |
+| **Reiniciar Windows** | Arrancó solo: `00:07:34 arrancando servicio "app-demo"` |
+| Corre como servicio real | La API responde `"usuario": "SYSTEM"` |
+| Apagado limpio | `stop solicitado por el SCM` antes del reinicio |
+| Event Log | Eventos `node-winsvc` 1000 y 2000 en el Visor, Aplicación |
+| `status` con uptime | `{"state":"running","pid":5136,"uptime":"12m"}` |
+
+**El hallazgo más valioso fue un accidente.** Al matar el hijo, el puerto 4100
+no se había liberado todavía y el relanzamiento falló:
+
+```
+00:06:06 [err] EADDRINUSE  port 4100
+00:06:07 el hijo termino con codigo exit code: 1
+00:06:07 relanzando el hijo en 1s
+00:06:08 hijo lanzado (pid 37072)
+```
+
+El supervisor lo resolvió solo, sin intervención. Es resiliencia demostrada en
+una condición real, no simulada.
+
+> Ojo al leer los PID: `status` devuelve el del **supervisor** (el proceso que
+> Windows controla), mientras que la API reporta el del **hijo** de Node. Es
+> correcto que no coincidan.
+
+---
+
 ## ⏳ Pendiente
 
-### 1. 🟡 Verificar el uptime con el servicio reiniciado
-`status` ya devuelve el PID real. El uptime sale `null` hasta que el servicio se
-reinicie con el núcleo nuevo, que es el que escribe la marca de arranque:
+### 1. 🔴 Probarlo en un segundo servidor
+Es lo único que de verdad falta. Todo lo anterior está probado en la máquina
+donde se construyó, que es justo donde siempre funciona todo. Con el paquete ya
+publicado es un par de comandos:
 
 ```powershell
-# consola de Administrador
-node dist\main.js restart
-node dist\main.js status     # debe traer pid Y uptime
+npm i -D aruna-winsvc
+npx aruna doctor
 ```
 
-También conviene mirar el Visor de eventos (Aplicación, origen `node-winsvc`)
-tras ese reinicio, para confirmar que los eventos entran.
+O directamente copiar un `.exe` generado con `aruna installer` y darle doble
+clic. `app-demo/` sirve de banco de pruebas: no toca base de datos, así que un
+fallo allí es de Aruna y no de la app.
 
-### 2. 🟡 Prueba end-to-end como Administrador
-Falta el paso que exige elevación:
-
-```powershell
-# En api-logistica/, doble clic en instalar-servicio.cmd
-# o desde una consola de Administrador:
-node ..\dist\main.js install
-node ..\dist\main.js start
-node ..\dist\main.js status          # debe decir "running"
-curl http://localhost:3080/salud     # debe responder ok:true
-# y confirmar en services.msc que sigue vivo tras reiniciar Windows
-```
+### 2. Detalles menores detectados
+- El `FileDescription` del núcleo dice "Instalador de servicios de Windows para
+  Node.js", y en el Administrador de tareas eso confunde: ese proceso es el
+  **supervisor**, no el instalador. Debería decir "Aruna — supervisor".
+- Los binarios internos siguen llamándose `node-winsvc-core.exe` y
+  `node-winsvc-setup.exe`, de antes del cambio de marca. Renombrarlos toca el
+  empaquetador y el instalador; funciona igual, pero queda inconsistente.
 
 ### 3. Más tests
 - Faltan los de integración: instalar/arrancar/parar/desinstalar un servicio
