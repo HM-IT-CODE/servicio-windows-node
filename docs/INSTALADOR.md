@@ -183,7 +183,8 @@ junto al producto.
 
 ## Qué hace el asistente generado
 
-1. Comprueba que **Node esté instalado**; si no, se niega a seguir.
+1. Comprueba que **Node esté instalado** — salvo que el paquete traiga el suyo
+   con `bundleNode`, en cuyo caso no exige nada.
 2. Pide la carpeta de destino.
 3. Muestra una página por cada `group` de `prompts`.
 4. Copia los archivos de `include` y el núcleo `node-winsvc-core.exe`.
@@ -192,8 +193,54 @@ junto al producto.
 7. Para y desregistra cualquier versión anterior del servicio, registra la nueva
    y la arranca.
 
-Al desinstalar, para y quita el servicio **antes** de borrar los archivos: si no,
-Windows deja el `.exe` bloqueado y la desinstalación queda a medias.
+---
+
+## Desinstalar
+
+El instalador se registra en **Agregar o quitar programas**, así que se quita
+como cualquier otro programa. También desde la carpeta de instalación:
+
+```
+"C:\Program Files\Tu App\desinstalar.exe" /desinstalar
+```
+
+Qué hace, en este orden:
+
+1. Para el servicio y espera a que suelte el puerto.
+2. Lo quita del SCM.
+3. Borra la entrada del registro.
+
+El orden importa: si borrara los archivos antes de quitar el servicio, Windows
+dejaría el ejecutable bloqueado y el servicio registrado apuntando a algo que
+ya no existe.
+
+**No borra la carpeta**, y es a propósito: el `.exe` que ejecuta la
+desinstalación vive dentro de ella, y Windows no deja borrar un archivo en uso.
+El mensaje final avisa de que puede borrarse a mano.
+
+---
+
+## Llevarlo a otro servidor
+
+Lo único que se copia es **el `.exe`**. Ni npm, ni este paquete, ni el código.
+
+```
+tu máquina                        servidor nuevo
+──────────                        ──────────────
+aruna installer
+  → instalar-tu-app.exe    ───►   doble clic
+                                  (se eleva solo, pregunta, instala, arranca)
+```
+
+**Si el servidor no tiene Node**, el `.exe` tiene que llevarlo dentro:
+
+```json
+"installer": { "bundleNode": true }
+```
+
+Se nota en el tamaño: sin Node son un par de MB, con Node unos 25. Si el
+asistente arranca y se queja de que falta Node, ese `.exe` se generó sin
+`bundleNode`.
 
 ---
 

@@ -27,8 +27,11 @@ npx aruna installer   →   instalar-my-api.exe
 ```
 
 One `.exe` with everything inside: your code, `node_modules`, the service core
-and — if you ask for it — `node.exe` itself. The target server needs **nothing
-installed**. Double-click, answer a couple of questions, done.
+and — with `"bundleNode": true` — `node.exe` itself. The target server then
+needs **nothing installed**. Double-click, answer a couple of questions, done.
+
+It uninstalls like any Windows program too: it registers in *Add or remove
+programs*, stops the service and unregisters it cleanly.
 
 **2. It verifies before it registers.**
 

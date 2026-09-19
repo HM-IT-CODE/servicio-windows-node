@@ -27,6 +27,7 @@
         "default": "4100",
         "group": "Servicio"
       }
-    ]
+    ],
+    "bundleNode": true
   }
 }
