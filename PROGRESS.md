@@ -50,18 +50,14 @@ Aplicando el patrón de producción de `api-interna-1` y `api-interna-2`:
   para que el instalador aborte.
 - **`instalar-servicio.cmd`** — doble clic, se eleva solo a administrador.
 
-### ★ API de prueba — `api-logistica/`
-API real de Node + SQL Server contra la base **`mi_base`**, sobre el flujo de
-garantías. Es el banco de pruebas end-to-end del servicio.
+### ★ API de prueba — `app-demo/`
+Servidor Node mínimo, sin base de datos, que sirve de banco de pruebas
+end-to-end: `npx aruna installer` lo convierte en un `.exe` de doble clic que lo
+registra como servicio. Si algo falla ahí, es de Aruna y no de la app.
 
-**Probada en vivo el 2026-09-18** contra `localhost/mi_base`: los cuatro tipos
-responden, la trazabilidad encadena correctamente
-(`INGGAR 30441 → REVGAR 34741 → SALGAR 30149`), y `doctor` pasa entero.
-
-> ⚠️ **El ingreso de garantía es `INGGAR`, con doble G.** No existe ningún
-> `INGAR` en la base. La API acepta `INGAR` como alias y lo traduce.
-
----
+> El sistema interno que se usó como primer banco de pruebas (una API real
+> contra SQL Server) se movió a su propio repo privado el 2026-09-22: en un
+> repo público no va nada del cliente — ni IPs, ni dominios, ni reglas de red.
 
 ### ★ Instalador propio — 2026-09-18 (noche)
 Ya **no hace falta Inno Setup**. `installer` genera un `.exe` autocontenido:
@@ -180,5 +176,6 @@ fallo allí es de Aruna y no de la app.
 ## 📍 Rutas
 
 - **Este proyecto:** `D:\2026\node-winsvc-servicio-node\`
-- **API de prueba:** `D:\2026\node-winsvc-servicio-node\api-logistica\`
+- **API de prueba:** `D:\2026\node-winsvc-servicio-node\app-demo\`
+- **Sistema interno (repo privado aparte):** `D:\2026\api-logistica\`
 - **Proyecto hermano (orquestador multi-MCP):** `D:\2026\RUST\HENRY MORENO-DEV\sentinel-hub\`

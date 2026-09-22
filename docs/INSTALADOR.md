@@ -88,14 +88,14 @@ Todo vive en la clave `installer` de `winsvc.config.json`:
 
 ```json
 {
-  "name": "api-logistica",
-  "displayName": "API Logistica - Garantias",
+  "name": "mi-api",
+  "displayName": "Mi API",
   "script": "src/server.js",
   "nodeArgs": ["--expose-gc", "--max-old-space-size=512"],
   "env": { "NODE_ENV": "production" },
 
   "installer": {
-    "appName": "API Logistica",
+    "appName": "Mi API",
     "version": "1.0.0",
     "publisher": "Henry Moreno",
     "include": ["src", "scripts", "node_modules", "package.json"],

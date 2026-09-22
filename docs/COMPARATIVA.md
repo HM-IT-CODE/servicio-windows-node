@@ -96,7 +96,7 @@ diagnóstico. NSSM y node-windows registran y que haya suerte.
 
 ## 5. Compresión del instalador ✱
 
-Medido sobre el caso real de `api-logistica`: `node.exe` de 80 MB + 7.900
+Medido sobre una API real de Node + SQL Server: `node.exe` de 80 MB + 7.900
 archivos de `node_modules`.
 
 | Formato | Tamaño | Tiempo |

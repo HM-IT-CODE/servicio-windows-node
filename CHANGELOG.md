@@ -26,8 +26,8 @@ and `api-interna-2`.
   checks everything before registering anything.
 - **`docs/ARQUITECTURA.md`** — the two-level supervisor explained, decision by
   decision.
-- **`api-logistica/`** — a real Node.js + SQL Server API used as the end-to-end
-  test bed, installable as a service with a double click.
+- **`app-demo/`** — a small Node.js API with no database, used as the
+  end-to-end test bed, installable as a service with a double click.
 - **Built-in installer wizard** — `installer` now ships its own Win32 wizard
   (`node-winsvc-setup.exe`, ~1 MB) with the app appended to it, so **no Inno
   Setup is needed**. Turquoise sidebar with step list, owner-drawn buttons,

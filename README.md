@@ -220,9 +220,9 @@ including what this project still lacks.
   supervisor works, and why each decision was made (Spanish).
 - [`docs/INSTALADOR.md`](./docs/INSTALADOR.md) — the `installer` command:
   building a wizard `.exe` straight from your config (Spanish).
-- [`api-logistica/`](./api-logistica) — a real Node.js API (SQL Server, warranty
-  document flow) used as the end-to-end test bed. Double-click
-  `instalar-servicio.cmd` and it runs as a native Windows service.
+- [`app-demo/`](./app-demo) — a small Node.js API with no database, used as
+  the end-to-end test bed: `npx aruna installer` turns it into a double-click
+  `.exe` that registers it as a native Windows service.
 
 ---
 
@@ -232,7 +232,7 @@ including what this project still lacks.
 - [x] Live log tail: `aruna logs -f`.
 - [x] `aruna restart`.
 - [x] `npx aruna doctor` — diagnose permissions / Node path / config.
-- [x] Double-click installer (`instalar-servicio.cmd`), self-elevating.
+- [x] Double-click installer, self-elevating.
 - [x] Monthly log rotation with UTF-8 BOM + child output captured line by line.
 - [x] SCM failure actions (restart on crash *and* on non-zero exit).
 - [x] Statically linked CRT — the binary is self-contained.
