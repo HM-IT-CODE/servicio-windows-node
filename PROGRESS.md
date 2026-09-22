@@ -165,6 +165,21 @@ fallo allí es de Aruna y no de la app.
 
 ---
 
+## 🔒 Regla de higiene: nada del trabajo en el repo público
+
+Antes de cada `push`, el hook `scripts/hooks/pre-push` revisa todos los
+archivos versionados buscando IPs privadas, dominios, nombres de clientes y de
+bases reales, y **bloquea el push** si encuentra algo. Se activa una vez por
+clon:
+
+```bash
+git config core.hooksPath scripts/hooks
+```
+
+El banco de pruebas es `app-demo/`; los sistemas del trabajo van en sus repos
+privados. Esta regla nació el 2026-09-22, después de sacar de aquí un sistema
+interno que estuvo cuatro días expuesto con sus IPs.
+
 ## 🧱 Reglas de arquitectura (Clean Code aplicado)
 
 - Una responsabilidad por archivo. Sin lógica de negocio en `main`.

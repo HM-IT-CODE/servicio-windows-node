@@ -1,0 +1,33 @@
+#!/bin/sh
+# Hook pre-push: no dejar subir datos de terceros a un repo público.
+#
+# Revisa TODOS los archivos versionados buscando IPs privadas, dominios
+# dinámicos, nombres de clientes o bases de datos reales. Si encuentra algo,
+# aborta el push y dice dónde. Diez segundos que evitan un problema laboral.
+#
+# Se activa con:  git config core.hooksPath scripts/hooks
+# (queda anotado en PROGRESS.md; hay que hacerlo una vez por clon).
+#
+# Para ampliar la lista: agrega palabras al PATRON, separadas por |.
+# Para saltarlo UNA vez (sabiendo lo que haces):  git push --no-verify
+
+PATRON='10\.[0-9]+\.[0-9]+\.[0-9]+|192\.168\.[0-9]+\.[0-9]+|172\.(1[6-9]|2[0-9]|3[01])\.[0-9]+\.[0-9]+|190\.120\.|ddns\.net|meruq|mikrotik|almacen|49712|logistica|integrador-entregas|api-datos|sifontes'
+
+# Los archivos que legítimamente hablan de IPs privadas en abstracto se excluyen aquí.
+EXCLUIR='^scripts/hooks/pre-push$'
+
+hallazgos=$(git ls-files | grep -v -E "$EXCLUIR" | xargs grep -n -i -E "$PATRON" 2>/dev/null)
+
+if [ -n "$hallazgos" ]; then
+  echo ""
+  echo "  PUSH BLOQUEADO: hay datos que no van en un repo público."
+  echo "  ------------------------------------------------------"
+  echo "$hallazgos" | cut -c1-140 | head -20
+  echo ""
+  echo "  Quita esos datos (o muévelos al repo privado) y vuelve a subir."
+  echo "  Si es un falso positivo, ajusta PATRON en scripts/hooks/pre-push."
+  echo ""
+  exit 1
+fi
+
+exit 0
