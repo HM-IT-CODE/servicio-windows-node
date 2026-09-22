@@ -1,6 +1,6 @@
 {
   "name": "aruna-winsvc",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Register Node.js apps as native Windows services, and ship them as a double-click installer. No NSSM, no .NET, zero dependencies.",
   "keywords": [
     "windows",

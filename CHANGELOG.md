@@ -1,13 +1,27 @@
 # Changelog
 
-All notable changes to **node-winsvc** are documented here.
+All notable changes to **Aruna** (`aruna-winsvc`, formerly `node-winsvc`) are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.0.2] - 2026-09-22
+
+### Changed
+- The end-to-end test bed is now `app-demo/` (a small API with no database).
+  The internal system that served as the first test bed moved to its own
+  private repository; nothing client-specific remains in this one.
+- The installer wizard no longer suggests a real database name as default.
+- README and docs point to `app-demo`.
+
+## [1.0.0] / [1.0.1] - 2026-09-18
+
+Published to npm as **`aruna-winsvc`** (the project's new name). Same content
+as 0.2.0 below plus the `installer` wizard; 1.0.1 fixed the package metadata.
+
 ## [0.2.0] - 2026-09-18
 
-Hardening pass based on the production pattern used by `api-interna-1`
-and `api-interna-2`.
+Hardening pass based on the production pattern of two internal Node.js APIs
+that had been running as Windows services for months.
 
 ### Added
 - **`doctor` command** — diagnoses config, core binary, Node, script and

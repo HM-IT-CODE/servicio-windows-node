@@ -34,7 +34,7 @@ Compila limpio con `npx tsc`.
 Compila limpio con `cargo build --release`. Binario en `bin/node-winsvc-core.exe`.
 
 ### Endurecido el 2026-09-18 (v0.2.0)
-Aplicando el patrón de producción de `api-interna-1` y `api-interna-2`:
+Aplicando el patrón de producción de dos APIs internas que llevan meses como servicio:
 
 - **`rust/.cargo/config.toml` con `+crt-static`** — el binario ya no dependía
   del runtime de C. Era el riesgo más serio: la compilación producía un exe
@@ -177,5 +177,5 @@ fallo allí es de Aruna y no de la app.
 
 - **Este proyecto:** `D:\2026\node-winsvc-servicio-node\`
 - **API de prueba:** `D:\2026\node-winsvc-servicio-node\app-demo\`
-- **Sistema interno (repo privado aparte):** `D:\2026\api-logistica\`
+- **Sistema interno del trabajo:** en su propio repo privado, fuera de este.
 - **Proyecto hermano (orquestador multi-MCP):** `D:\2026\RUST\HENRY MORENO-DEV\sentinel-hub\`
